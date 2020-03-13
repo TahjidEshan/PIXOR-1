@@ -11,7 +11,7 @@ from torchvision import transforms
 
 #KITTI_PATH = '/home/autoronto/Kitti/object'
 
-KITTI_PATH = 'KITTI'
+KITTI_PATH = '/media/eshan/OS/Users/Eshan/Documents/Kitti/data/2011_09_26/2011_09_26_drive_0001_sync'
 
 class KITTI(Dataset):
 
@@ -152,7 +152,7 @@ class KITTI(Dataset):
         '''
         index = self.image_sets[index]
         f_name = (6-len(index)) * '0' + index + '.txt'
-        label_path = os.path.join(KITTI_PATH, 'training', 'label_2', f_name)
+        label_path = os.path.join(KITTI_PATH, 'oxts', 'data', f_name)
 
         object_list = {'Car': 1,'Truck':0, 'DontCare':0, 'Van':0, 'Tram':0}
         label_map = np.zeros(self.geometry['label_shape'], dtype=np.float32)
@@ -196,7 +196,7 @@ class KITTI(Dataset):
         velo_files = []
         for file in self.image_sets:
             file = '{}.bin'.format(file)
-            velo_files.append(os.path.join(KITTI_PATH, 'training', 'velodyne', file))
+            velo_files.append(os.path.join(KITTI_PATH, 'velodyne_points', 'data', file))
 
         print('Found ' + str(len(velo_files)) + ' Velodyne scans...')
         # Read the Velodyne scans. Each point is [x,y,z,reflectance]

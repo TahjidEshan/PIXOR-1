@@ -116,7 +116,7 @@ def train(config_name, device):
 def experiment(config_name, device):
     config, _, _, _ = load_config(config_name)
     net, criterion = build_model(config, device, train=False)
-    net.load_state_dict(torch.load(get_model_name(config['name']), map_location=device))
+    #net.load_state_dict(torch.load(get_model_name(config['name']), map_location=device))
     net.set_decode(True)
     loader, _ = get_data_loader(batch_size=1, use_npy=config['use_npy'], frame_range=config['frame_range'])
     net.eval()
@@ -173,5 +173,5 @@ if __name__ == "__main__":
     print('using device', device)
 
     name = 'config.json'
-    #train(name, device)
-    experiment(name, device)
+    train(name, device)
+    #experiment(name, device)
